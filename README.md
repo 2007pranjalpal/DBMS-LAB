@@ -3,7 +3,6 @@
 SQL solutions for Lab Sheets 1–5 from the uploaded lab sheet, prepared for MySQL Workbench and GitHub.
 
 ## Files
-- `00_setup.sql` — creates `CollegeDB` and the shared tables/sample data.
 - `01_lab_sheet_1_ddl.sql` — DDL: `CREATE`, `ALTER`, `TRUNCATE`, `DROP`.
 - `02_lab_sheet_2_dml.sql` — DML: `INSERT`, `UPDATE`, `DELETE`.
 - `03_lab_sheet_3_functions.sql` — number, aggregate, character, conversion, and date functions.
