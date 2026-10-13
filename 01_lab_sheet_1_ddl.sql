@@ -1,11 +1,7 @@
 -- Lab Sheet 1: DDL Commands - CREATE, ALTER, DROP
 CREATE DATABASE IF NOT EXISTS CollegeDB;
 USE CollegeDB;
-
--- 1. Create database
 CREATE DATABASE IF NOT EXISTS CollegeDB;
-
--- 2-9. Create example tables (run 00_setup.sql first for the full shared schema).
 CREATE TABLE IF NOT EXISTS Student_DDL_Demo (
     Student_ID INT PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
@@ -62,40 +58,14 @@ CREATE TABLE IF NOT EXISTS Library_DDL_Demo (
     Author VARCHAR(100),
     Price DECIMAL(10,2)
 );
-
--- 10. Department table with primary key: Dept_ID is the PRIMARY KEY above.
--- 11. Student primary key + NOT NULL: shown in Student_DDL_Demo.
--- 12. Employee UNIQUE Email: shown in Employee_DDL_Demo.
--- 13. Product CHECK Price > 0: shown in Product_DDL_Demo.
-
--- 14-15. Add Email and Phone columns.
 ALTER TABLE Student_DDL_Demo ADD COLUMN Email VARCHAR(150);
 ALTER TABLE Student_DDL_Demo ADD COLUMN Phone VARCHAR(20);
-
--- 16. Modify datatype/size of Name.
 ALTER TABLE Student_DDL_Demo MODIFY COLUMN Name VARCHAR(150) NOT NULL;
-
--- 17. Rename Student table to Student_Details.
 ALTER TABLE Student_DDL_Demo RENAME TO Student_Details_DDL_Demo;
-
--- 18. Rename City to Address (MySQL 8.0 syntax).
 ALTER TABLE Student_Details_DDL_Demo RENAME COLUMN City TO Address;
-
--- 19. Add Salary to Employee.
 ALTER TABLE Employee_DDL_Demo ADD COLUMN Salary_Bonus DECIMAL(10,2);
-
--- 20-21. Drop Phone and Email columns.
 ALTER TABLE Student_Details_DDL_Demo DROP COLUMN Phone;
 ALTER TABLE Student_Details_DDL_Demo DROP COLUMN Email;
-
--- 22. TRUNCATE example (uncomment to remove all rows from this demo table).
--- TRUNCATE TABLE Student_Details_DDL_Demo;
-
--- 23-24. DROP examples (uncomment when you want to remove these demo tables).
--- DROP TABLE Course_DDL_Demo;
--- DROP TABLE Customer_DDL_Demo;
-
--- 25. Complete Student table using PK, NOT NULL, UNIQUE, CHECK.
 CREATE TABLE IF NOT EXISTS Student_Constraints_Demo (
     Student_ID INT PRIMARY KEY,
     Name VARCHAR(100) NOT NULL,
