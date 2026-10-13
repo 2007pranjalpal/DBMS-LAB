@@ -1,76 +1,136 @@
--- Lab Sheet 2: DML Commands - INSERT, UPDATE, DELETE
-USE CollegeDB;
-CREATE TABLE IF NOT EXISTS Student_DML_Demo (
+CREATE DATABASE IF NOT EXISTS CollegeDB_DML;
+USE CollegeDB_DML;
+
+DROP TABLE IF EXISTS Student;
+DROP TABLE IF EXISTS Employee;
+DROP TABLE IF EXISTS Department;
+DROP TABLE IF EXISTS Product;
+DROP TABLE IF EXISTS Customer;
+DROP TABLE IF EXISTS Course;
+
+CREATE TABLE Student (
     Student_ID INT PRIMARY KEY,
-    Name VARCHAR(100) NOT NULL,
+    Name VARCHAR(50) NOT NULL,
     Age INT,
-    Course VARCHAR(100),
-    City VARCHAR(100)
+    Course VARCHAR(50),
+    City VARCHAR(50)
 );
 
-DELETE FROM Student_DML_Demo;
-INSERT INTO Student_DML_Demo VALUES (1, 'Aarav', 19, 'BCA', 'Meerut');
-INSERT INTO Student_DML_Demo VALUES (2, 'Diya', 20, 'BCA', 'Delhi');
-INSERT INTO Student_DML_Demo VALUES (3, 'Kabir', 21, 'B.Tech', 'Noida');
-INSERT INTO Student_DML_Demo VALUES (4, 'Sara', 19, 'BBA', 'Meerut');
-INSERT INTO Student_DML_Demo VALUES (5, 'Arjun', 22, 'BCA', 'Delhi');
-INSERT INTO Student_DML_Demo VALUES (6, 'Mehak', 20, 'BBA', 'Ghaziabad');
-INSERT INTO Student_DML_Demo (Student_ID, Name, Age, Course, City) VALUES
-(7, 'Ishita', 18, 'BCA', 'Noida'),
-(8, 'Dev', 21, 'B.Tech', 'Delhi');
-INSERT INTO Employee (Emp_ID, Emp_Name, Department, Salary, Email, Joining_Date, Manager_ID, Dept_ID)
-VALUES (205, 'Demo Employee', 'Computer Science', 40000, 'demo.employee@example.com', '2024-01-01', 201, 1);
+CREATE TABLE Employee (
+    Emp_ID INT PRIMARY KEY,
+    Emp_Name VARCHAR(50) NOT NULL,
+    Department VARCHAR(50),
+    Salary DECIMAL(10,2),
+    Email VARCHAR(100) UNIQUE
+);
 
-INSERT INTO Department (Dept_ID, Dept_Name, Location) VALUES
-(9, 'Demo Department', 'Block E');
+CREATE TABLE Department (
+    Dept_ID INT PRIMARY KEY,
+    Dept_Name VARCHAR(50),
+    Location VARCHAR(50)
+);
 
-INSERT INTO Product (Product_ID, Product_Name, Price, Quantity) VALUES
-(305, 'Demo Product', 99.00, 5);
+CREATE TABLE Product (
+    Product_ID INT PRIMARY KEY,
+    Product_Name VARCHAR(50),
+    Price DECIMAL(10,2),
+    Quantity INT
+);
 
-INSERT INTO Customer (Customer_ID, Customer_Name, Email, Phone) VALUES
-(403, 'Demo Customer', 'demo.customer@example.com', '9876533333');
+CREATE TABLE Customer (
+    Customer_ID INT PRIMARY KEY,
+    Customer_Name VARCHAR(50),
+    Email VARCHAR(100),
+    Phone VARCHAR(15)
+);
 
-INSERT INTO Course (Course_ID, Course_Name, Duration, Fees, Dept_ID) VALUES
-(105, 'Demo Course', '6 months', 12000, 9);
+CREATE TABLE Course (
+    Course_ID INT PRIMARY KEY,
+    Course_Name VARCHAR(50),
+    Duration VARCHAR(30),
+    Fees DECIMAL(10,2)
+);
 
-INSERT INTO Student_DML_Demo (Student_ID, Name, Age, Course, City)
-VALUES (9, 'Riya', 20, 'BCA', 'Meerut');
+-- Q1-Q3: single-row, separate and multiple-row INSERT statements
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (101, 'Aman', 20, 'BTech', 'Delhi');
 
-INSERT INTO Student_DML_Demo (Student_ID, Name)
-VALUES (10, 'Om');
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (102, 'Riya', 19, 'BCA', 'Meerut');
 
-UPDATE Student_DML_Demo SET City = 'Jaipur' WHERE Student_ID = 1;
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (103, 'Karan', 21, 'BTech', 'Jaipur');
 
-UPDATE Employee SET Salary = 42000 WHERE Emp_ID = 205;
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (104, 'Neha', 20, 'BBA', 'Delhi');
 
-UPDATE Employee SET Salary = Salary * 1.10 WHERE Emp_ID = 205;
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (105, 'Ishita', 19, 'BCA', 'Meerut');
 
-UPDATE Product SET Price = Price * 1.05 WHERE Product_ID = 305;
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (106, 'Rahul', 22, 'BTech', 'Haridwar');
 
-UPDATE Student_DML_Demo SET Course = 'B.Tech' WHERE Student_ID = 1;
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (107, 'Simran', 20, 'BTech', 'Delhi'),
+       (108, 'Mohit', 21, 'BCA', 'Jaipur');
 
-UPDATE Employee SET Department = 'Business', Dept_ID = 3 WHERE Emp_ID = 205;
+-- Q4-Q8: insert records into different tables
+INSERT INTO Employee (Emp_ID, Emp_Name, Department, Salary, Email)
+VALUES (201, 'Arun', 'IT', 45000, 'arun@example.com'),
+       (202, 'Meena', 'HR', 40000, 'meena@example.com'),
+       (203, 'Dev', 'IT', 52000, 'dev@example.com');
 
-UPDATE Student_DML_Demo SET City = 'Delhi' WHERE City = 'Meerut';
+INSERT INTO Department (Dept_ID, Dept_Name, Location)
+VALUES (1, 'IT', 'Delhi'), (2, 'HR', 'Jaipur'), (3, 'Sales', 'Meerut');
 
-UPDATE Course SET Fees = 12500 WHERE Course_ID = 105;
+INSERT INTO Product (Product_ID, Product_Name, Price, Quantity)
+VALUES (301, 'Keyboard', 800, 10), (302, 'Mouse', 400, 0), (303, 'Monitor', 7000, 5);
 
-UPDATE Student_DML_Demo
-SET Age = 21, Course = 'BCA', City = 'Noida'
-WHERE Student_ID = 2;
+INSERT INTO Customer (Customer_ID, Customer_Name, Email, Phone)
+VALUES (401, 'Aarav', 'aarav@example.com', '9876543210');
 
-DELETE FROM Student_DML_Demo WHERE Student_ID = 10;
+INSERT INTO Course (Course_ID, Course_Name, Duration, Fees)
+VALUES (501, 'BTech', '4 years', 120000), (502, 'BCA', '3 years', 80000);
 
-DELETE FROM Student_DML_Demo WHERE City = 'Ghaziabad';
+-- Q9-Q10: insert using all columns and selected columns
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (109, 'Pooja', 20, 'BTech', 'Dehradun');
 
-DELETE FROM Employee WHERE Emp_ID = 205 AND Salary < 50000;
+INSERT INTO Student (Student_ID, Name, Course)
+VALUES (110, 'Kabir', 'BCA');
 
-DELETE FROM Product WHERE Product_ID = 305 AND Quantity = 0;
+-- Q11-Q19: UPDATE examples
+UPDATE Student SET City = 'Noida' WHERE Student_ID = 101;
+UPDATE Employee SET Salary = 48000 WHERE Emp_ID = 201;
+UPDATE Employee SET Salary = Salary * 1.10;
+UPDATE Product SET Price = Price * 1.05;
+UPDATE Student SET Course = 'AI-ML' WHERE Student_ID = 103;
+UPDATE Employee SET Department = 'Finance' WHERE Emp_ID = 202;
+UPDATE Student SET City = 'Delhi' WHERE City = 'Meerut';
+UPDATE Course SET Fees = 125000 WHERE Course_ID = 501;
+UPDATE Student SET Age = 21, City = 'Roorkee' WHERE Student_ID = 104;
 
-DELETE FROM Student_DML_Demo
-WHERE (Age < 18 AND City = 'Delhi') OR (Course = 'BBA' AND City = 'Delhi');
+-- Q20-Q24: DELETE examples
+DELETE FROM Student WHERE Student_ID = 110;
+DELETE FROM Student WHERE City = 'Haridwar';
+DELETE FROM Employee WHERE Salary < 41000;
+DELETE FROM Product WHERE Quantity = 0;
+DELETE FROM Student WHERE (City = 'Jaipur' AND Age < 21) OR Course = 'BBA';
 
-SELECT * FROM Student_DML_Demo ORDER BY Student_ID;
+-- Q25: insert, display, update, display, delete and display
+INSERT INTO Student (Student_ID, Name, Age, Course, City)
+VALUES (199, 'Test Student', 20, 'BTech', 'Delhi');
+
+SELECT * FROM Student WHERE Student_ID = 199;
+UPDATE Student SET City = 'Noida' WHERE Student_ID = 199;
+SELECT * FROM Student WHERE Student_ID = 199;
+DELETE FROM Student WHERE Student_ID = 199;
+SELECT * FROM Student WHERE Student_ID = 199;
+
+-- Verify the final records
+SELECT * FROM Student;
 SELECT * FROM Employee;
+SELECT * FROM Department;
 SELECT * FROM Product;
+SELECT * FROM Customer;
 SELECT * FROM Course;
